@@ -1,0 +1,114 @@
+# DVC Configuration for Election Prediction System
+
+# Define pipeline stages
+stages:
+  # Stage 1: Generate dataset
+  generate_dataset:
+    cmd: python src/data/make_dataset.py
+    deps:
+      - src/data/make_dataset.py
+      - src/utils/config.py
+    outs:
+      - data/raw/election_data.csv
+      - data/raw/election_data_validation.csv
+    metrics:
+      - data/raw/dataset_stats.json:
+          cache: false
+
+  # Stage 2: Preprocess data
+  preprocess:
+    cmd: python src/data/preprocess.py
+    deps:
+      - src/data/preprocess.py
+      - src/utils/config.py
+      - data/raw/election_data.csv
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - models/scaler.pkl
+    metrics:
+      - data/processed/preprocessing_stats.json:
+          cache: false
+
+  # Stage 3: Feature engineering
+  engineer_features:
+    cmd: python src/data/features.py
+    deps:
+      - src/data/features.py
+      - src/utils/config.py
+      - data/processed/train.csv
+      - data/processed/test.csv
+    outs:
+      - data/features/train_features.csv
+      - data/features/test_features.csv
+      - data/features/feature_names.txt
+    metrics:
+      - data/features/feature_stats.json:
+          cache: false
+
+  # Stage 4: Train models
+  train:
+    cmd: python src/train/train.py
+    deps:
+      - src/train/train.py
+      - src/utils/config.py
+      - data/features/train_features.csv
+      - data/features/test_features.csv
+    params:
+      - src/utils/config.py:
+          - Config.RANDOM_STATE
+          - Config.TEST_SIZE
+          - Config.MODELS_TO_TRAIN
+    outs:
+      - models/best_model.pkl
+      - models/model_metadata.json
+    metrics:
+      - reports/training_metrics.json:
+          cache: false
+
+  # Stage 5: Evaluate model
+  evaluate:
+    cmd: python src/train/evaluate.py
+    deps:
+      - src/train/evaluate.py
+      - models/best_model.pkl
+      - data/features/test_features.csv
+    outs:
+      - reports/evaluation_report.json
+      - reports/figures/confusion_matrix.png
+      - reports/figures/roc_curve.png
+    metrics:
+      - reports/evaluation_report.json:
+          cache: false
+
+  # Stage 6: Detect drift
+  detect_drift:
+    cmd: python src/monitoring/drift_monitoring.py
+    deps:
+      - src/monitoring/drift_monitoring.py
+      - data/features/train_features.csv
+      - data/raw/election_data_validation.csv
+    outs:
+      - reports/drift_report.json
+      - reports/drift_report.html
+    metrics:
+      - reports/drift_report.json:
+          cache: false
+
+# Remote storage configuration
+# Uncomment and configure for your storage backend
+
+# remote:
+#   - name: s3storage
+#     url: s3://my-bucket/dvc-storage
+#     region: us-east-1
+
+# remote:
+#   - name: gcs
+#     url: gs://my-bucket/dvc-storage
+#     projectname: my-project
+
+# remote:
+#   - name: azure
+#     url: azure://my-container/dvc-storage
+#     account_name: mystorageaccount

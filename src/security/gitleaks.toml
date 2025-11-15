@@ -1,0 +1,98 @@
+# Gitleaks Configuration
+# Prevents secrets from being committed to the repository
+
+title = "Gitleaks Configuration for Election Prediction System"
+
+[extend]
+# useDefault will extend the base configuration with the default gitleaks config
+useDefault = true
+
+[allowlist]
+description = "Allowlist for false positives"
+regexes = [
+    # Allow example/dummy values
+    '''example\.com''',
+    '''EXAMPLE_''',
+    '''dummy_''',
+    '''test_key_''',
+    '''fake_''',
+]
+
+paths = [
+    # Allow certain files/paths
+    '''gitleaks\.toml''',
+    '''\.github/workflows/.*\.ya?ml''',
+    '''README\.md''',
+]
+
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key ID"
+regex = '''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
+tags = ["aws", "credentials"]
+
+[[rules]]
+id = "aws-secret-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)aws(.{0,20})?(?-i)['\"][0-9a-zA-Z\/+]{40}['\"]'''
+tags = ["aws", "credentials"]
+
+[[rules]]
+id = "github-token"
+description = "GitHub Personal Access Token"
+regex = '''ghp_[0-9a-zA-Z]{36}'''
+tags = ["github", "token"]
+
+[[rules]]
+id = "github-oauth"
+description = "GitHub OAuth Token"
+regex = '''gho_[0-9a-zA-Z]{36}'''
+tags = ["github", "token"]
+
+[[rules]]
+id = "slack-token"
+description = "Slack Token"
+regex = '''xox[baprs]-([0-9a-zA-Z]{10,48})'''
+tags = ["slack", "token"]
+
+[[rules]]
+id = "slack-webhook"
+description = "Slack Webhook URL"
+regex = '''https://hooks\.slack\.com/services/T[a-zA-Z0-9_]{8,10}/B[a-zA-Z0-9_]{8,10}/[a-zA-Z0-9_]{24}'''
+tags = ["slack", "webhook"]
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(api[_-]?key|apikey|secret[_-]?key)(.{0,20})?['\"][0-9a-zA-Z]{32,45}['\"]'''
+tags = ["api", "key"]
+
+[[rules]]
+id = "private-key"
+description = "Private Key"
+regex = '''-----BEGIN (RSA|DSA|EC|OPENSSH) PRIVATE KEY-----'''
+tags = ["private-key"]
+
+[[rules]]
+id = "password-in-url"
+description = "Password in URL"
+regex = '''[a-zA-Z]{3,10}://[^/\\s:@]{3,20}:[^/\\s:@]{3,20}@.{1,100}'''
+tags = ["password", "url"]
+
+[[rules]]
+id = "mlflow-token"
+description = "MLflow Tracking Token"
+regex = '''(?i)mlflow(.{0,20})?['\"][0-9a-zA-Z]{32,}['\"]'''
+tags = ["mlflow", "token"]
+
+[[rules]]
+id = "database-connection-string"
+description = "Database Connection String"
+regex = '''(?i)(jdbc|postgresql|mysql|mongodb|redis)://[^\\s]+'''
+tags = ["database", "connection"]
+
+[allowlist.regexTarget]
+regexes = [
+    # Ignore base64 encoded data in test files
+    '''testdata''',
+]

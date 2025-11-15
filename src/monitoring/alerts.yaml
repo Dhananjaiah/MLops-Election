@@ -1,0 +1,114 @@
+# Alert Configuration for Election Prediction Monitoring
+
+alerting:
+  # Drift Detection Alerts
+  drift_alerts:
+    - name: data_drift_detected
+      condition: drift_detected > 0
+      severity: high
+      message: "Data drift detected in election features. Model retraining recommended."
+      actions:
+        - trigger_retrain_pipeline
+        - send_notification
+    
+    - name: high_drift_share
+      condition: drift_share > 0.3
+      severity: critical
+      message: "High drift detected: over 30% of features have drifted significantly."
+      actions:
+        - trigger_retrain_pipeline
+        - send_alert_email
+        - create_incident
+  
+  # Model Performance Alerts
+  performance_alerts:
+    - name: low_accuracy
+      condition: model_accuracy < 0.80
+      severity: high
+      message: "Model accuracy has dropped below 80%. Investigation required."
+      actions:
+        - send_notification
+        - trigger_model_evaluation
+    
+    - name: accuracy_degradation
+      condition: accuracy_drop > 0.05
+      severity: medium
+      message: "Model accuracy has degraded by more than 5%."
+      actions:
+        - send_notification
+        - schedule_retrain
+  
+  # Data Quality Alerts
+  data_quality_alerts:
+    - name: low_data_quality
+      condition: data_quality_score < 0.85
+      severity: medium
+      message: "Data quality score is below acceptable threshold."
+      actions:
+        - send_notification
+        - trigger_data_validation
+    
+    - name: high_missing_values
+      condition: missing_values_count > 100
+      severity: medium
+      message: "High number of missing values detected in recent data."
+      actions:
+        - send_notification
+        - trigger_data_cleanup
+  
+  # API Performance Alerts
+  api_alerts:
+    - name: high_latency
+      condition: p95_latency > 1.0
+      severity: high
+      message: "API P95 latency exceeds 1 second."
+      actions:
+        - send_notification
+        - scale_up_instances
+    
+    - name: high_error_rate
+      condition: error_rate > 0.05
+      severity: critical
+      message: "API error rate exceeds 5%."
+      actions:
+        - send_alert_email
+        - create_incident
+        - trigger_rollback
+    
+    - name: low_confidence_predictions
+      condition: avg_confidence < 0.6
+      severity: medium
+      message: "Average prediction confidence is low."
+      actions:
+        - send_notification
+        - trigger_model_evaluation
+
+# Notification Configuration
+notifications:
+  channels:
+    - type: slack
+      webhook_url: ${SLACK_WEBHOOK_URL}
+      enabled: true
+    
+    - type: email
+      recipients:
+        - mlops-team@example.com
+        - data-science@example.com
+      enabled: true
+    
+    - type: pagerduty
+      integration_key: ${PAGERDUTY_INTEGRATION_KEY}
+      enabled: false
+
+# Monitoring Schedule
+monitoring:
+  drift_check_interval: "1h"  # Check for drift every hour
+  performance_check_interval: "6h"  # Check performance every 6 hours
+  data_quality_check_interval: "12h"  # Check data quality twice daily
+  
+  thresholds:
+    drift_threshold: 0.1
+    min_accuracy: 0.80
+    min_data_quality: 0.85
+    max_latency_p95: 1.0
+    max_error_rate: 0.05

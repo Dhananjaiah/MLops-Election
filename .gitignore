@@ -1,0 +1,120 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# DVC
+.dvc/cache/
+.dvc/tmp/
+
+# Data
+data/raw/*.csv
+data/processed/*.csv
+data/features/*.csv
+data/incoming/
+data/production/
+!data/.gitkeep
+
+# Models
+models/*.pkl
+models/*.h5
+models/*.joblib
+!models/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Reports
+reports/*.html
+reports/*.pdf
+reports/figures/*.png
+reports/security/
+!reports/.gitkeep
+
+# Predictions
+predictions/
+!predictions/.gitkeep
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Docker
+*.tar
+*.gz
+
+# Airflow
+airflow/dags/__pycache__/
+airflow/logs/
+airflow.db
+airflow.cfg
+
+# Kubernetes
+*.kubeconfig
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Security
+*.pem
+*.key
+*.crt
+secrets/
+
+# Monitoring
+prometheus_data/
+grafana_data/
