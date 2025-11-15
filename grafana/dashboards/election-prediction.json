@@ -1,0 +1,201 @@
+{
+  "dashboard": {
+    "title": "Election Prediction - MLOps Dashboard",
+    "tags": ["mlops", "election", "prediction"],
+    "timezone": "browser",
+    "refresh": "30s",
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "API Request Rate",
+        "type": "graph",
+        "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "rate(election_api_requests_total[5m])",
+            "legendFormat": "{{method}} {{endpoint}}"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "API P95 Latency",
+        "type": "graph",
+        "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(election_api_request_latency_seconds_bucket[5m]))",
+            "legendFormat": "{{endpoint}}"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Error Rate",
+        "type": "graph",
+        "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "rate(election_api_requests_total{status=~\"5..\"}[5m])",
+            "legendFormat": "5xx errors"
+          },
+          {
+            "expr": "rate(election_api_requests_total{status=~\"4..\"}[5m])",
+            "legendFormat": "4xx errors"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Model Accuracy",
+        "type": "gauge",
+        "gridPos": {"x": 12, "y": 8, "w": 6, "h": 8},
+        "targets": [
+          {
+            "expr": "election_model_accuracy",
+            "legendFormat": "Accuracy"
+          }
+        ],
+        "options": {
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            {"value": 0.8, "color": "red"},
+            {"value": 0.85, "color": "yellow"},
+            {"value": 0.9, "color": "green"}
+          ]
+        }
+      },
+      {
+        "id": 5,
+        "title": "Drift Status",
+        "type": "stat",
+        "gridPos": {"x": 18, "y": 8, "w": 6, "h": 8},
+        "targets": [
+          {
+            "expr": "election_drift_detected",
+            "legendFormat": "Drift Detected"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "textMode": "value",
+          "mappings": [
+            {"value": 0, "text": "No Drift", "color": "green"},
+            {"value": 1, "text": "Drift Detected", "color": "red"}
+          ]
+        }
+      },
+      {
+        "id": 6,
+        "title": "Prediction Confidence Distribution",
+        "type": "histogram",
+        "gridPos": {"x": 0, "y": 16, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "election_prediction_confidence",
+            "legendFormat": "Confidence"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Drift Share",
+        "type": "graph",
+        "gridPos": {"x": 12, "y": 16, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "election_drift_share",
+            "legendFormat": "Drift Share"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Total Predictions",
+        "type": "stat",
+        "gridPos": {"x": 0, "y": 24, "w": 8, "h": 4},
+        "targets": [
+          {
+            "expr": "sum(election_predictions_total)",
+            "legendFormat": "Total"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Predictions by Winner",
+        "type": "piechart",
+        "gridPos": {"x": 8, "y": 24, "w": 8, "h": 8},
+        "targets": [
+          {
+            "expr": "election_predictions_total",
+            "legendFormat": "{{winner}}"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "CPU Usage",
+        "type": "graph",
+        "gridPos": {"x": 16, "y": 24, "w": 8, "h": 8},
+        "targets": [
+          {
+            "expr": "rate(container_cpu_usage_seconds_total{pod=~\"election-prediction-api.*\"}[5m])",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Memory Usage",
+        "type": "graph",
+        "gridPos": {"x": 0, "y": 32, "w": 12, "h": 8},
+        "targets": [
+          {
+            "expr": "container_memory_usage_bytes{pod=~\"election-prediction-api.*\"}",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Pod Count",
+        "type": "stat",
+        "gridPos": {"x": 12, "y": 32, "w": 6, "h": 4},
+        "targets": [
+          {
+            "expr": "count(up{job=\"election-prediction-api\"})",
+            "legendFormat": "Pods"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Data Quality Score",
+        "type": "gauge",
+        "gridPos": {"x": 18, "y": 32, "w": 6, "h": 8},
+        "targets": [
+          {
+            "expr": "election_data_quality_score",
+            "legendFormat": "Quality"
+          }
+        ],
+        "options": {
+          "min": 0,
+          "max": 1,
+          "thresholds": [
+            {"value": 0.85, "color": "red"},
+            {"value": 0.9, "color": "yellow"},
+            {"value": 0.95, "color": "green"}
+          ]
+        }
+      }
+    ]
+  }
+}
