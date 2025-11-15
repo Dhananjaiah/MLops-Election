@@ -15,6 +15,9 @@ jobs:
   security-scan:
     name: Security Scanning
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,6 +33,8 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         python-version: ['3.9', '3.10', '3.11']
@@ -70,6 +75,8 @@ jobs:
   lint:
     name: Code Quality
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -96,6 +103,9 @@ jobs:
     name: Build Docker Image
     runs-on: ubuntu-latest
     needs: [security-scan, test, lint]
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -138,6 +148,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: github.event_name != 'pull_request'
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -157,6 +170,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, trivy-scan]
     if: github.ref == 'refs/heads/develop'
+    permissions:
+      contents: read
     environment:
       name: development
       url: https://dev.election-prediction.example.com
@@ -184,6 +199,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, trivy-scan]
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
     environment:
       name: staging
       url: https://staging.election-prediction.example.com
@@ -216,6 +233,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy-staging
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
     environment:
       name: production
       url: https://election-prediction.example.com
@@ -262,6 +281,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy-production]
     if: always()
+    permissions:
+      contents: read
     steps:
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
