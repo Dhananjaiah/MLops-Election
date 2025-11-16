@@ -300,11 +300,9 @@ def main():
     test_df = pd.read_csv(test_path)
     logger.info(f"Loaded test data: {test_df.shape}")
     
-    # Get feature names
-    from src.data.features import ElectionFeatureEngineering
-    feature_engineer = ElectionFeatureEngineering()
-    feature_engineer.engineer_features(pd.DataFrame())  # Just to initialize
-    feature_names = feature_engineer.get_all_feature_names()
+    # Get feature names - exclude non-feature columns
+    exclude_cols = [Config.TARGET_COLUMN, 'region_id']
+    feature_names = [col for col in test_df.columns if col not in exclude_cols]
     
     # Prepare data
     X_test = test_df[feature_names].values

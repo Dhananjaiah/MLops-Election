@@ -89,8 +89,10 @@ class DriftMonitor:
             
             self.drift_detected = drift_share > self.drift_threshold
             
+            from datetime import datetime, timezone
+            
             self.drift_report = {
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
                 "drift_detected": self.drift_detected,
                 "drift_share": drift_share,
                 "n_drifted_features": n_drifted,
@@ -151,8 +153,10 @@ class DriftMonitor:
         drift_share = len(drifted_features) / len(feature_columns) if feature_columns else 0
         self.drift_detected = drift_share > self.drift_threshold
         
+        from datetime import datetime, timezone
+        
         self.drift_report = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "drift_detected": self.drift_detected,
             "drift_share": drift_share,
             "n_drifted_features": len(drifted_features),
@@ -185,6 +189,7 @@ class DriftMonitor:
         logger.info("Detecting prediction drift...")
         
         from scipy.stats import ks_2samp, chisquare
+        from datetime import datetime, timezone
         
         # Distribution comparison
         statistic, p_value = ks_2samp(reference_predictions, current_predictions)
@@ -194,7 +199,7 @@ class DriftMonitor:
         curr_dist = pd.Series(current_predictions).value_counts(normalize=True)
         
         prediction_drift_report = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "ks_statistic": float(statistic),
             "ks_p_value": float(p_value),
             "drift_detected": p_value < 0.05,

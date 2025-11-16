@@ -1,0 +1,138 @@
+{
+  "timestamp": "2025-11-16T06:49:45.663500",
+  "drift_detected": false,
+  "drift_share": 0.03225806451612903,
+  "n_drifted_features": 1,
+  "n_features": 31,
+  "drifted_features": [
+    "prev_election_turnout"
+  ],
+  "drift_scores": {
+    "population": {
+      "statistic": 0.019875,
+      "p_value": 0.548283776913667
+    },
+    "median_age": {
+      "statistic": 0.014875,
+      "p_value": 0.8676560970330033
+    },
+    "median_income": {
+      "statistic": 0.018625,
+      "p_value": 0.6314554840786611
+    },
+    "education_rate": {
+      "statistic": 0.01875,
+      "p_value": 0.6230374570668277
+    },
+    "urban_ratio": {
+      "statistic": 0.0265,
+      "p_value": 0.20893086007671244
+    },
+    "prev_election_turnout": {
+      "statistic": 0.0375,
+      "p_value": 0.021876014803333368
+    },
+    "prev_winner_margin": {
+      "statistic": 0.020125,
+      "p_value": 0.5320557422356732
+    },
+    "voter_registration_rate": {
+      "statistic": 0.015875,
+      "p_value": 0.811177680138124
+    },
+    "social_sentiment_score": {
+      "statistic": 0.01275,
+      "p_value": 0.9554347928613115
+    },
+    "candidate_a_favorability": {
+      "statistic": 0.017125,
+      "p_value": 0.7320169818054364
+    },
+    "candidate_b_favorability": {
+      "statistic": 0.019625,
+      "p_value": 0.5646782952123918
+    },
+    "poll_candidate_a": {
+      "statistic": 0.028,
+      "p_value": 0.16083703707308766
+    },
+    "poll_candidate_b": {
+      "statistic": 0.027875,
+      "p_value": 0.16447502336417674
+    },
+    "undecided_rate": {
+      "statistic": 0.0225,
+      "p_value": 0.3893321359225074
+    },
+    "turnout_trend": {
+      "statistic": 0.025375,
+      "p_value": 0.25173097268459643
+    },
+    "expected_turnout": {
+      "statistic": 0.01775,
+      "p_value": 0.6904218849516078
+    },
+    "turnout_surprise": {
+      "statistic": 0.021625,
+      "p_value": 0.4391823266604935
+    },
+    "demographic_score": {
+      "statistic": 0.02,
+      "p_value": 0.5401476562409842
+    },
+    "age_income_interaction": {
+      "statistic": 0.02075,
+      "p_value": 0.49234090283192117
+    },
+    "urban_education": {
+      "statistic": 0.01875,
+      "p_value": 0.6230374570668277
+    },
+    "population_density": {
+      "statistic": 0.02475,
+      "p_value": 0.2781507533084026
+    },
+    "poll_margin": {
+      "statistic": 0.03075,
+      "p_value": 0.09583338468464729
+    },
+    "poll_confidence": {
+      "statistic": 0.0225,
+      "p_value": 0.3893321359225074
+    },
+    "favorability_diff": {
+      "statistic": 0.018625,
+      "p_value": 0.6314554840786611
+    },
+    "poll_favorability_alignment": {
+      "statistic": 0.0275,
+      "p_value": 0.17578205597802565
+    },
+    "incumbent_advantage": {
+      "statistic": 0.020125,
+      "p_value": 0.5320557422356732
+    },
+    "challenger_momentum": {
+      "statistic": 0.01675,
+      "p_value": 0.7564768244124629
+    },
+    "momentum_score": {
+      "statistic": 0.02775,
+      "p_value": 0.1681780737561344
+    },
+    "poll_turnout": {
+      "statistic": 0.026,
+      "p_value": 0.22721212047026146
+    },
+    "sentiment_favorability": {
+      "statistic": 0.01475,
+      "p_value": 0.8741344283903589
+    },
+    "urban_income": {
+      "statistic": 0.01775,
+      "p_value": 0.6904218849516078
+    }
+  },
+  "threshold": 0.1,
+  "method": "ks_test"
+}
