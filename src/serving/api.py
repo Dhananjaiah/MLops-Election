@@ -142,11 +142,24 @@ class PredictionService:
                 self.scaler = joblib.load(scaler_path)
                 logger.info(f"Scaler loaded from {scaler_path}")
             
-            # Load feature names
-            from src.data.features import ElectionFeatureEngineering
-            feature_engineer = ElectionFeatureEngineering()
-            feature_engineer.engineer_features(pd.DataFrame() if 'pd' in dir() else None)
-            self.feature_names = feature_engineer.get_all_feature_names()
+            # Load feature names from saved file or calculate from training data
+            feature_names_path = Config.DATA_DIR / "features" / "feature_names.txt"
+            if feature_names_path.exists():
+                with open(feature_names_path, 'r') as f:
+                    self.feature_names = [line.strip() for line in f.readlines()]
+                logger.info(f"Loaded {len(self.feature_names)} feature names")
+            else:
+                # Fallback: use all features except target and ID
+                train_path = Config.DATA_DIR / "features" / "train_features.csv"
+                if train_path.exists():
+                    import pandas as pd
+                    train_df = pd.read_csv(train_path, nrows=1)
+                    exclude_cols = [Config.TARGET_COLUMN, 'region_id']
+                    self.feature_names = [col for col in train_df.columns if col not in exclude_cols]
+                    logger.info(f"Loaded {len(self.feature_names)} feature names from training data")
+                else:
+                    logger.warning("Could not load feature names")
+                    self.feature_names = None
             
             # Update Prometheus metric
             MODEL_VERSION.set(1.0)

@@ -87,8 +87,8 @@ class ElectionFeatureEngineering:
             df_new["urban_ratio"] * df_new["education_rate"]
         )
         
-        # Population density proxy
-        df_new["population_density"] = np.log1p(df_new["population"])
+        # Population density proxy (handle negative values from scaled data)
+        df_new["population_density"] = np.log1p(np.abs(df_new["population"]) + 1)
         
         self.engineered_features.extend([
             "demographic_score",
@@ -225,6 +225,9 @@ class ElectionFeatureEngineering:
             DataFrame with engineered features
         """
         logger.info("Starting feature engineering pipeline...")
+        
+        # Reset engineered features list for each run
+        self.engineered_features = []
         
         df_features = df.copy()
         
