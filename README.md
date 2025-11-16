@@ -6,6 +6,8 @@
 
 A complete, production-ready MLOps system for predicting election outcomes using machine learning. This project demonstrates end-to-end ML lifecycle management including data pipelines, model training, serving, monitoring, and automated retraining.
 
+> 🎓 **Udemy Course Students**: Check out the comprehensive [Udemy Implementation Guide](docs/UDEMY_IMPLEMENTATION_GUIDE.md) for step-by-step instructions, hands-on exercises, and detailed explanations of all 14 modules!
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -461,7 +463,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Credits
 
-- Built as part of the 14-module MLOps course
+- Built as part of the **Complete MLOps Course** - 14 comprehensive modules
+- 📚 **[Full Udemy Implementation Guide](docs/UDEMY_IMPLEMENTATION_GUIDE.md)** - Step-by-step walkthrough for all modules
 - Inspired by real-world production ML systems
 - Community contributions welcome
 
@@ -471,6 +474,7 @@ For questions or feedback:
 - Open an issue on GitHub
 - Email: mlops-team@example.com
 - Slack: #election-prediction
+- 🎓 **Course Support**: See [Udemy Guide](docs/UDEMY_IMPLEMENTATION_GUIDE.md) for office hours and support channels
 
 ---
 
