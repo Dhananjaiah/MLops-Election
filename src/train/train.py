@@ -304,10 +304,9 @@ def main():
     logger.info(f"Loaded train data: {train_df.shape}")
     logger.info(f"Loaded test data: {test_df.shape}")
     
-    # Get feature names
-    feature_engineer = ElectionFeatureEngineering()
-    train_df_with_features = feature_engineer.engineer_features(pd.DataFrame())  # Just to get feature names
-    feature_names = feature_engineer.get_all_feature_names()
+    # Get feature names - exclude non-feature columns
+    exclude_cols = [Config.TARGET_COLUMN, 'region_id']
+    feature_names = [col for col in train_df.columns if col not in exclude_cols]
     
     logger.info(f"Using {len(feature_names)} features")
     

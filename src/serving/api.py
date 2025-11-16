@@ -46,6 +46,25 @@ MODEL_VERSION = Gauge(
 class ElectionFeatures(BaseModel):
     """Input features for election prediction."""
     
+    model_config = {"json_schema_extra": {
+        "example": {
+            "population": 150000,
+            "median_age": 42.5,
+            "median_income": 55000,
+            "education_rate": 0.85,
+            "urban_ratio": 0.7,
+            "prev_election_turnout": 0.68,
+            "prev_winner_margin": 0.05,
+            "voter_registration_rate": 0.82,
+            "social_sentiment_score": 0.15,
+            "candidate_a_favorability": 0.55,
+            "candidate_b_favorability": 0.48,
+            "poll_candidate_a": 0.48,
+            "poll_candidate_b": 0.45,
+            "undecided_rate": 0.07
+        }
+    }}
+    
     # Demographics
     population: float = Field(..., description="Population of the region")
     median_age: float = Field(..., description="Median age")
@@ -67,26 +86,6 @@ class ElectionFeatures(BaseModel):
     poll_candidate_a: float = Field(..., description="Poll support for Candidate A (0-1)")
     poll_candidate_b: float = Field(..., description="Poll support for Candidate B (0-1)")
     undecided_rate: float = Field(..., description="Undecided voters rate (0-1)")
-    
-    class Config:
-        schema_extra = {
-            "example": {
-                "population": 150000,
-                "median_age": 42.5,
-                "median_income": 55000,
-                "education_rate": 0.85,
-                "urban_ratio": 0.7,
-                "prev_election_turnout": 0.68,
-                "prev_winner_margin": 0.05,
-                "voter_registration_rate": 0.82,
-                "social_sentiment_score": 0.15,
-                "candidate_a_favorability": 0.55,
-                "candidate_b_favorability": 0.48,
-                "poll_candidate_a": 0.48,
-                "poll_candidate_b": 0.45,
-                "undecided_rate": 0.07
-            }
-        }
 
 
 class PredictionResponse(BaseModel):
@@ -142,11 +141,24 @@ class PredictionService:
                 self.scaler = joblib.load(scaler_path)
                 logger.info(f"Scaler loaded from {scaler_path}")
             
-            # Load feature names
-            from src.data.features import ElectionFeatureEngineering
-            feature_engineer = ElectionFeatureEngineering()
-            feature_engineer.engineer_features(pd.DataFrame() if 'pd' in dir() else None)
-            self.feature_names = feature_engineer.get_all_feature_names()
+            # Load feature names from saved file or calculate from training data
+            feature_names_path = Config.DATA_DIR / "features" / "feature_names.txt"
+            if feature_names_path.exists():
+                with open(feature_names_path, 'r') as f:
+                    self.feature_names = [line.strip() for line in f.readlines()]
+                logger.info(f"Loaded {len(self.feature_names)} feature names")
+            else:
+                # Fallback: use all features except target and ID
+                train_path = Config.DATA_DIR / "features" / "train_features.csv"
+                if train_path.exists():
+                    import pandas as pd
+                    train_df = pd.read_csv(train_path, nrows=1)
+                    exclude_cols = [Config.TARGET_COLUMN, 'region_id']
+                    self.feature_names = [col for col in train_df.columns if col not in exclude_cols]
+                    logger.info(f"Loaded {len(self.feature_names)} feature names from training data")
+                else:
+                    logger.warning("Could not load feature names")
+                    self.feature_names = None
             
             # Update Prometheus metric
             MODEL_VERSION.set(1.0)
@@ -194,7 +206,7 @@ class PredictionService:
             raise ValueError("Model not loaded")
         
         # Convert features to dict
-        features_dict = features.dict()
+        features_dict = features.model_dump()
         
         # Engineer features
         X = self.engineer_features(features_dict)
@@ -255,7 +267,7 @@ async def track_requests(request: Request, call_next):
     return response
 
 
-@app.get("/", response_model=Dict[str, str])
+@app.get("/")
 async def root():
     """Root endpoint."""
     return {
@@ -272,13 +284,13 @@ async def root():
 @app.get("/health", response_model=HealthResponse)
 async def health_check():
     """Health check endpoint."""
-    from datetime import datetime
+    from datetime import datetime, timezone
     
     return HealthResponse(
         status="healthy",
         model_loaded=prediction_service.model is not None,
         model_version=prediction_service.model_version,
-        timestamp=datetime.utcnow().isoformat()
+        timestamp=datetime.now(timezone.utc).isoformat()
     )
 
 
