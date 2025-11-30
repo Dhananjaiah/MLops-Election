@@ -62,6 +62,11 @@ class ChurnPredictor:
         # Convert to DataFrame
         df = pd.DataFrame([features])
         
+        # Filter to only include features the model was trained on
+        if self.model.feature_names:
+            available_features = [f for f in self.model.feature_names if f in df.columns]
+            df = df[available_features]
+        
         # Make prediction
         prediction = self.model.predict(df)[0]
         probabilities = self.model.predict_proba(df)[0]
@@ -87,6 +92,11 @@ class ChurnPredictor:
             List of prediction results
         """
         df = pd.DataFrame(features_list)
+        
+        # Filter to only include features the model was trained on
+        if self.model.feature_names:
+            available_features = [f for f in self.model.feature_names if f in df.columns]
+            df = df[available_features]
         
         predictions = self.model.predict(df)
         probabilities = self.model.predict_proba(df)

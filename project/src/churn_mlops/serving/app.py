@@ -73,8 +73,8 @@ class CustomerFeatures(BaseModel):
     tech_support: Optional[str] = Field("no", description="Has tech support")
     online_security: Optional[str] = Field("no", description="Has online security")
     
-    class Config:
-        json_schema_extra = {
+    model_config = {
+        "json_schema_extra": {
             "example": {
                 "tenure": 24,
                 "monthly_charges": 65.50,
@@ -86,6 +86,7 @@ class CustomerFeatures(BaseModel):
                 "online_security": "yes",
             }
         }
+    }
 
 
 class PredictionResponse(BaseModel):
@@ -152,7 +153,7 @@ async def health_check():
     
     return HealthResponse(
         status="healthy",
-        timestamp=datetime.utcnow().isoformat(),
+        timestamp=datetime.now().isoformat(),
         model_loaded=model_loaded,
         version="1.0.0",
     )

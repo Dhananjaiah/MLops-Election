@@ -78,15 +78,18 @@ class TestAPIPredictions:
     @pytest.fixture
     def client_with_model(self, trained_model):
         """Create test client with trained model."""
-        # Set model path environment variable
+        # Set model path environment variable BEFORE importing the app
         os.environ["MODEL_PATH"] = trained_model
         
-        # Reset global predictor
-        from churn_mlops.serving import app as app_module
-        app_module._predictor = None
+        # Need to reimport the app module to pick up the new MODEL_PATH
+        import importlib
+        import churn_mlops.serving.app as app_module
         
-        from churn_mlops.serving.app import app
-        return TestClient(app)
+        # Reset global predictor and reload the module
+        app_module._predictor = None
+        importlib.reload(app_module)
+        
+        return TestClient(app_module.app)
     
     def test_predict_single(self, client_with_model):
         """Test single prediction endpoint."""
