@@ -1,481 +1,209 @@
-# 🗳️ Election Prediction System - Production MLOps
+# 🚀 Complete MLOps Course: From Notebook to Production
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![MLOps](https://img.shields.io/badge/MLOps-Production%20Ready-brightgreen)
+![Course](https://img.shields.io/badge/Course-Udemy%20Style-orange)
 
-A complete, production-ready MLOps system for predicting election outcomes using machine learning. This project demonstrates end-to-end ML lifecycle management including data pipelines, model training, serving, monitoring, and automated retraining.
-
-> 🎓 **Udemy Course Students**: Check out the comprehensive [Udemy Implementation Guide](docs/UDEMY_IMPLEMENTATION_GUIDE.md) for step-by-step instructions, hands-on exercises, and detailed explanations of all 14 modules!
+A production-grade, Udemy-style MLOps course repository featuring hands-on labs, slides, and a complete end-to-end Customer Churn Prediction project.
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Features](#features)
+- [Course Overview](#course-overview)
+- [Who Is This Course For?](#who-is-this-course-for)
+- [What You'll Learn](#what-youll-learn)
 - [Tech Stack](#tech-stack)
+- [Repository Structure](#repository-structure)
 - [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [Monitoring](#monitoring)
-- [Security](#security)
-- [Troubleshooting](#troubleshooting)
+- [Course Sections](#course-sections)
+- [The Reference Project](#the-reference-project)
 - [Contributing](#contributing)
 - [License](#license)
 
-## 🎯 Overview
+## 🎯 Course Overview
 
-This project predicts which candidate will win in each region using features like:
-- **Demographics**: Population, median age, income, education rates, urban ratio
-- **Voting History**: Past turnout, winner margins, registration rates
-- **Surveys**: Poll results, undecided voter rates
-- **Sentiment**: Social media sentiment scores, candidate favorability
+This course takes you from a Jupyter notebook prototype to a production-ready ML system. You'll learn the complete MLOps lifecycle through:
 
-### Key Capabilities
+- **15 comprehensive sections** covering every aspect of MLOps
+- **Hands-on labs** with real code you can run
+- **A single end-to-end project** (Customer Churn Prediction) that evolves throughout the course
+- **Production-grade infrastructure** templates and configurations
 
-- ✅ Automated data pipeline with DVC version control
-- ✅ Multi-model training with MLflow tracking
-- ✅ FastAPI REST API for real-time predictions
-- ✅ Batch prediction pipeline with Airflow
-- ✅ Drift detection and automated retraining
-- ✅ Kubernetes deployment with auto-scaling
-- ✅ Comprehensive monitoring with Prometheus & Grafana
-- ✅ Security scanning and SBOM generation
-- ✅ Complete CI/CD pipeline with GitHub Actions
+> 📖 For detailed syllabus and how to navigate this repo, see [COURSE_OVERVIEW.md](COURSE_OVERVIEW.md)
 
-## 🏗️ Architecture
+## 👤 Who Is This Course For?
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          DATA PIPELINE                                  │
-├─────────────────────────────────────────────────────────────────────────┤
-│  Raw Data → Preprocessing → Feature Engineering → Model Training        │
-│     ↓            ↓                 ↓                    ↓                │
-│   DVC        Validation       DVC Tracking         MLflow               │
-└─────────────────────────────────────────────────────────────────────────┘
-                               ↓
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        MODEL REGISTRY                                   │
-├─────────────────────────────────────────────────────────────────────────┤
-│  MLflow Model Registry → Best Model Selection → Version Control         │
-└─────────────────────────────────────────────────────────────────────────┘
-                               ↓
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          SERVING LAYER                                  │
-├─────────────────────────────────────────────────────────────────────────┤
-│  FastAPI REST API  ←→  Kubernetes  ←→  Load Balancer                   │
-│       ↓                    ↓                                             │
-│  Batch Predictions    Auto-scaling                                      │
-└─────────────────────────────────────────────────────────────────────────┘
-                               ↓
-┌─────────────────────────────────────────────────────────────────────────┐
-│                     MONITORING & OBSERVABILITY                          │
-├─────────────────────────────────────────────────────────────────────────┤
-│  Prometheus Metrics → Grafana Dashboards → Alertmanager                │
-│  Evidently Drift Detection → Automated Retraining Trigger               │
-└─────────────────────────────────────────────────────────────────────────┘
-                               ↓
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      ORCHESTRATION                                      │
-├─────────────────────────────────────────────────────────────────────────┤
-│  Airflow DAGs:                                                          │
-│    - Training Pipeline (Weekly)                                         │
-│    - Batch Scoring (Daily)                                              │
-│    - Drift Detection & Retrain (Every 6 hours)                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+- **Data Scientists** who want to deploy their models
+- **ML Engineers** looking to formalize their MLOps practices
+- **DevOps Engineers** expanding into ML systems
+- **Software Engineers** transitioning to ML
+- **Anyone** interested in production machine learning
 
-## ✨ Features
+### Prerequisites
 
-### Data Pipeline
-- Automated data generation and validation
-- Feature engineering with 20+ engineered features
-- Data versioning with DVC
-- Preprocessing with outlier detection and handling
+- Basic Python programming
+- Familiarity with ML concepts (training, evaluation, etc.)
+- Basic command line knowledge
+- No advanced math or PhD required!
 
-### Model Training
-- Multi-model training (Random Forest, XGBoost, Logistic Regression)
-- Hyperparameter tuning with GridSearchCV
-- Experiment tracking with MLflow
-- Automated best model selection
-- Model registry integration
+## 📚 What You'll Learn
 
-### Serving
-- FastAPI REST API with automatic documentation
-- Health check and metrics endpoints
-- Batch prediction capabilities
-- Prometheus metrics export
-- Docker containerization
+By the end of this course, you will be able to:
 
-### Monitoring
-- Real-time drift detection with Evidently
-- Performance metrics tracking
-- Prometheus alerting rules
-- Grafana dashboards with:
-  - API latency and throughput
-  - Model accuracy and confidence
-  - Drift detection status
-  - Resource utilization
-
-### Automation
-- Airflow DAGs for pipeline orchestration
-- Automated retraining on drift detection
-- Scheduled batch predictions
-- CI/CD with GitHub Actions
-
-### Security
-- Trivy vulnerability scanning
-- SBOM generation with Syft
-- Gitleaks secret detection
-- RBAC in Kubernetes
-- Network policies
+- ✅ Structure ML projects for production
+- ✅ Version data, code, and models together
+- ✅ Build reproducible training pipelines
+- ✅ Package models as REST APIs
+- ✅ Containerize ML applications with Docker
+- ✅ Set up CI/CD for ML systems
+- ✅ Deploy to Kubernetes
+- ✅ Monitor model performance and detect drift
+- ✅ Implement governance and security best practices
+- ✅ Present your MLOps project in job interviews
 
 ## 🛠️ Tech Stack
 
 | Category | Technologies |
 |----------|-------------|
-| **ML/Data** | Python, Pandas, NumPy, Scikit-learn, XGBoost |
-| **MLOps** | MLflow, DVC, Evidently |
-| **API** | FastAPI, Uvicorn |
-| **Orchestration** | Apache Airflow |
-| **Containerization** | Docker |
-| **Orchestration** | Kubernetes |
-| **Monitoring** | Prometheus, Grafana |
+| **Language** | Python 3.9+ |
+| **ML Framework** | scikit-learn |
+| **API Framework** | FastAPI |
+| **Containerization** | Docker, Docker Compose |
+| **Version Control** | Git, GitHub |
 | **CI/CD** | GitHub Actions |
-| **Security** | Trivy, Syft, Gitleaks |
+| **Experiment Tracking** | MLflow (optional) |
+| **Orchestration** | Overview of Airflow, Prefect, etc. |
+| **Deployment** | Kubernetes basics |
+| **Monitoring** | Prometheus, Grafana concepts |
+
+## 📁 Repository Structure
+
+```
+.
+├── README.md                 # This file - course overview
+├── COURSE_OVERVIEW.md        # Detailed syllabus
+├── course/                   # Course content (15 sections)
+│   ├── section-01-intro/
+│   ├── section-02-setup/
+│   ├── ...
+│   └── section-15-career/
+├── project/                  # End-to-end reference project
+│   ├── src/churn_mlops/      # Python package
+│   ├── notebooks/            # Exploration notebooks
+│   ├── config/               # Configuration files
+│   ├── tests/                # Unit tests
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── infra/                    # Infrastructure templates
+│   ├── ci/                   # GitHub Actions workflows
+│   └── k8s/                  # Kubernetes manifests
+├── slides/                   # Slide deck placeholders
+├── quizzes/                  # Section quizzes
+└── assets/                   # Diagrams and images
+    ├── diagrams/
+    └── images/
+```
 
 ## 🚀 Getting Started
 
-### Prerequisites
-
-- Python 3.9+
-- Docker
-- Kubernetes cluster (optional, for deployment)
-- Git
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/MLops-Election.git
-   cd MLops-Election
-   ```
-
-2. **Install dependencies**
-   ```bash
-   make install
-   # Or manually:
-   pip install -r requirements.txt
-   ```
-
-3. **Set up configuration**
-   ```bash
-   # Copy and edit configuration
-   export MLFLOW_TRACKING_URI=http://localhost:5000
-   export API_PORT=8000
-   ```
-
-### Quick Start
-
-Run the complete pipeline:
-```bash
-make pipeline
-```
-
-This will:
-1. Generate synthetic election data
-2. Preprocess and engineer features
-3. Train multiple models
-4. Evaluate and compare models
-5. Select the best model
-
-## 📖 Usage
-
-### Training a Model
+### 1. Clone the Repository
 
 ```bash
-# Run complete data pipeline
-make data
-
-# Train models with MLflow tracking
-make train
-
-# Evaluate models
-make evaluate
+git clone https://github.com/yourusername/mlops-course.git
+cd mlops-course
 ```
 
-### Starting the API Server
+### 2. Set Up Your Environment
 
 ```bash
-# Local development
-make serve
-
-# Or with Docker
-make docker-build
-make docker-run
+cd project
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-The API will be available at `http://localhost:8000`
+### 3. Navigate the Course
 
-### API Endpoints
+1. Start with [COURSE_OVERVIEW.md](COURSE_OVERVIEW.md) for the complete syllabus
+2. Follow the sections in order under `/course`
+3. Complete hands-on labs in `/project`
+4. Test your knowledge with quizzes in `/quizzes`
 
-- `GET /` - API information
-- `GET /health` - Health check
-- `POST /predict` - Single prediction
-- `POST /predict/batch` - Batch predictions
-- `GET /metrics` - Prometheus metrics
-- `GET /model/info` - Model information
-
-### Example API Request
+### 4. Run the Project
 
 ```bash
-curl -X POST "http://localhost:8000/predict" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "population": 150000,
-    "median_age": 42.5,
-    "median_income": 55000,
-    "education_rate": 0.85,
-    "urban_ratio": 0.7,
-    "prev_election_turnout": 0.68,
-    "prev_winner_margin": 0.05,
-    "voter_registration_rate": 0.82,
-    "social_sentiment_score": 0.15,
-    "candidate_a_favorability": 0.55,
-    "candidate_b_favorability": 0.48,
-    "poll_candidate_a": 0.48,
-    "poll_candidate_b": 0.45,
-    "undecided_rate": 0.07
-  }'
+# Train a model
+cd project
+python -m churn_mlops.models.train
+
+# Start the API
+uvicorn churn_mlops.serving.app:app --reload
+
+# Or use Docker
+docker-compose up
 ```
 
-Response:
-```json
-{
-  "predicted_winner": "Candidate_A",
-  "confidence": 0.87,
-  "probabilities": {
-    "Candidate_A": 0.87,
-    "Candidate_B": 0.13
-  },
-  "model_version": "1.0.0"
-}
-```
+## 📖 Course Sections
 
-### Batch Predictions
+| Section | Title | Topics |
+|---------|-------|--------|
+| 1 | Welcome & Big Picture | What is MLOps, why we need it, course agenda |
+| 2 | Prerequisites & Setup | Dev environment, tools, Git basics |
+| 3 | ML Lifecycle | CRISP-DM, where things break, responsibilities |
+| 4 | Project Overview | Use case, requirements, architecture |
+| 5 | Data Engineering | Data types, ingestion, quality, feature stores |
+| 6 | Experimentation | Reproducibility, experiment tracking, MLflow |
+| 7 | Model Packaging | Python packages, APIs, Docker |
+| 8 | Versioning & Registry | Data/model versioning, model registry |
+| 9 | Training Pipelines | Orchestration, DAGs, scheduling |
+| 10 | CI/CD for ML | Testing, building, deploying ML systems |
+| 11 | Deployment | Serving patterns, Kubernetes basics |
+| 12 | Monitoring | Metrics, drift detection, alerting |
+| 13 | Governance | Security, compliance, model cards |
+| 14 | Capstone | Complete end-to-end walkthrough |
+| 15 | Career | Job roles, interviews, next steps |
 
-```bash
-make batch-predict
-```
+## 🎯 The Reference Project
 
-### Drift Monitoring
+Throughout this course, we build a **Customer Churn Prediction** system:
 
-```bash
-# Check for data drift
-make monitor-drift
+- **Business Problem**: Predict which customers will cancel their subscription
+- **Data**: Customer demographics, usage patterns, support interactions
+- **Model**: Classification (Logistic Regression, Random Forest, etc.)
+- **Serving**: REST API for real-time predictions
+- **Deployment**: Docker → Kubernetes
+- **Monitoring**: Performance metrics, drift detection
 
-# View drift reports
-cat reports/drift_report.json
-open reports/drift_report.html
-```
-
-## 🚢 Deployment
-
-### Docker Deployment
-
-```bash
-# Build image
-make docker-build
-
-# Run container
-make docker-run
-
-# Check status
-docker ps
-
-# View logs
-docker logs election-api
-```
-
-### Kubernetes Deployment
-
-```bash
-# Deploy to Kubernetes
-make k8s-deploy
-
-# Check deployment status
-make k8s-status
-
-# View logs
-make k8s-logs
-```
-
-The deployment includes:
-- Deployment with 3 replicas
-- LoadBalancer service
-- Horizontal Pod Autoscaler (2-10 replicas)
-- RBAC and network policies
-
-### CI/CD Pipeline
-
-The GitHub Actions workflow automatically:
-1. Runs security scans (Gitleaks)
-2. Executes unit tests
-3. Performs linting checks
-4. Builds Docker image
-5. Scans with Trivy
-6. Deploys to dev/staging/production
-7. Runs smoke tests
-8. Sends notifications
-
-## 📊 Monitoring
-
-### Prometheus Metrics
-
-- `election_api_requests_total` - Total API requests
-- `election_api_request_latency_seconds` - Request latency
-- `election_prediction_confidence` - Prediction confidence
-- `election_drift_detected` - Drift detection status
-- `election_model_accuracy` - Model accuracy
-
-### Grafana Dashboards
-
-Access Grafana at `http://localhost:3000` (default credentials: admin/admin)
-
-The dashboard includes:
-- API request rate and latency (P95, P99)
-- Error rates
-- Model accuracy gauge
-- Drift detection status
-- Prediction confidence distribution
-- Resource utilization (CPU, memory)
-
-### Alerts
-
-Configured alerts for:
-- High API latency (>1s)
-- High error rate (>5%)
-- Data drift detected
-- Low model accuracy (<80%)
-- High CPU/memory usage
-- Pod crash looping
-
-## 🔒 Security
-
-### Security Scanning
-
-```bash
-# Scan Docker image for vulnerabilities
-make security-scan
-
-# Generate SBOM
-make security-sbom
-
-# Check for secrets
-gitleaks detect --source . --config src/security/gitleaks.toml
-```
-
-### Security Features
-
-- Non-root container user
-- Read-only model volumes
-- Network policies in Kubernetes
-- RBAC for pod permissions
-- Automated vulnerability scanning
-- Secret detection in CI/CD
-- SBOM generation
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Issue: Model not found**
-```bash
-# Solution: Train the model first
-make train
-```
-
-**Issue: API returns 500 error**
-```bash
-# Check logs
-docker logs election-api
-# Or in Kubernetes
-kubectl logs -n mlops -l app=election-prediction
-```
-
-**Issue: High memory usage**
-```bash
-# Reduce batch size or workers
-export API_WORKERS=2
-```
-
-**Issue: Drift detected but no retrain**
-```bash
-# Manually trigger retraining
-python src/train/train.py
-```
-
-### Debugging
-
-Enable debug logging:
-```bash
-export LOG_LEVEL=DEBUG
-python src/serving/api.py
-```
-
-View detailed metrics:
-```bash
-curl http://localhost:8000/metrics
-```
-
-## 📈 MLOps Roadmap
-
-- [x] Data pipeline with versioning
-- [x] Model training and tracking
-- [x] API serving
-- [x] Batch predictions
-- [x] Drift monitoring
-- [x] Automated retraining
-- [x] Kubernetes deployment
-- [x] Monitoring and alerting
-- [x] CI/CD pipeline
-- [x] Security scanning
-- [ ] A/B testing framework
-- [ ] Model explainability (SHAP)
-- [ ] Multi-region deployment
-- [ ] Model serving optimization
-- [ ] Advanced feature store
-- [ ] Real-time streaming predictions
+This single project evolves from a simple notebook to a production-ready ML system.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+We welcome contributions! Please see our contribution guidelines:
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+### Areas for Contribution
+
+- Fix typos or improve explanations
+- Add new lab exercises
+- Create additional quiz questions
+- Improve code examples
+- Add diagrams and visualizations
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Credits
+## 📧 Contact & Support
 
-- Built as part of the **Complete MLOps Course** - 14 comprehensive modules
-- 📚 **[Full Udemy Implementation Guide](docs/UDEMY_IMPLEMENTATION_GUIDE.md)** - Step-by-step walkthrough for all modules
-- Inspired by real-world production ML systems
-- Community contributions welcome
-
-## 📧 Contact
-
-For questions or feedback:
-- Open an issue on GitHub
-- Email: mlops-team@example.com
-- Slack: #election-prediction
-- 🎓 **Course Support**: See [Udemy Guide](docs/UDEMY_IMPLEMENTATION_GUIDE.md) for office hours and support channels
+- **Issues**: Open a GitHub issue for bugs or feature requests
+- **Discussions**: Use GitHub Discussions for questions
+- **Email**: mlops-course@example.com
 
 ---
 
-**⭐ If you find this project useful, please give it a star!**
+**⭐ If you find this course helpful, please give it a star!**
+
+Happy Learning! 🎓

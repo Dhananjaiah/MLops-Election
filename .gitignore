@@ -41,6 +41,7 @@ env/
 # Testing
 .pytest_cache/
 .coverage
+coverage.xml
 htmlcov/
 .tox/
 .hypothesis/
@@ -49,38 +50,23 @@ htmlcov/
 mlruns/
 mlartifacts/
 
-# DVC
-.dvc/cache/
-.dvc/tmp/
+# Data (project-specific)
+project/data/
+!project/data/.gitkeep
 
-# Data
-data/raw/*.csv
-data/processed/*.csv
-data/features/*.csv
-data/incoming/
-data/production/
-!data/.gitkeep
-
-# Models
-models/*.pkl
-models/*.h5
-models/*.joblib
-!models/.gitkeep
+# Models (trained models - don't commit)
+project/models/*.pkl
+project/models/*.h5
+project/models/*.joblib
+!project/models/.gitkeep
 
 # Logs
 logs/
 *.log
 
 # Reports
-reports/*.html
-reports/*.pdf
-reports/figures/*.png
-reports/security/
+reports/
 !reports/.gitkeep
-
-# Predictions
-predictions/
-!predictions/.gitkeep
 
 # Environment variables
 .env
@@ -90,12 +76,6 @@ predictions/
 # Docker
 *.tar
 *.gz
-
-# Airflow
-airflow/dags/__pycache__/
-airflow/logs/
-airflow.db
-airflow.cfg
 
 # Kubernetes
 *.kubeconfig
@@ -115,6 +95,10 @@ Thumbs.db
 *.crt
 secrets/
 
-# Monitoring
-prometheus_data/
-grafana_data/
+# Node (if any frontend tools)
+node_modules/
+
+# Slide files (too large for git - use LFS or external storage)
+slides/*.pptx
+slides/*.pdf
+!slides/README.md
