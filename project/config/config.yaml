@@ -1,0 +1,94 @@
+# Configuration for Customer Churn Prediction Project
+# ===================================================
+
+# Model Configuration
+model:
+  type: random_forest  # Options: random_forest, logistic_regression
+  params:
+    n_estimators: 100
+    max_depth: 10
+    random_state: 42
+
+# Data Configuration
+data:
+  # Raw data path (when using real data)
+  raw_path: data/raw/customers.csv
+  # Processed data path
+  processed_path: data/processed/customers_processed.csv
+  # Test split ratio
+  test_size: 0.2
+  # Random seed for reproducibility
+  random_state: 42
+  # Required columns for validation
+  required_columns:
+    - customer_id
+    - tenure
+    - monthly_charges
+    - total_charges
+    - churn
+
+# Feature Engineering Configuration
+features:
+  # Numeric columns to scale
+  numeric_columns:
+    - tenure
+    - monthly_charges
+    - total_charges
+  # Categorical columns to encode
+  categorical_columns:
+    - contract_type
+    - payment_method
+    - internet_service
+    - tech_support
+    - online_security
+  # Missing value handling
+  missing:
+    numeric_strategy: median
+    categorical_strategy: mode
+
+# Training Configuration
+training:
+  # Cross-validation folds
+  cv_folds: 5
+  # Metrics to track
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - roc_auc
+  # Early stopping (if applicable)
+  early_stopping: true
+  early_stopping_rounds: 10
+
+# Output Configuration
+output:
+  # Model save path
+  model_path: models/churn_model.pkl
+  # Feature transformer path
+  transformer_path: models/feature_transformer.pkl
+  # Metrics output path
+  metrics_path: reports/metrics.json
+
+# API Configuration
+api:
+  host: 0.0.0.0
+  port: 8000
+  workers: 4
+  # Model path for serving
+  model_path: models/churn_model.pkl
+
+# MLflow Configuration (Optional)
+mlflow:
+  enabled: false
+  tracking_uri: http://localhost:5000
+  experiment_name: churn_prediction
+  # Register model automatically
+  auto_register: true
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  # Log file path (empty for stdout only)
+  file: ""

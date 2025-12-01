@@ -1,0 +1,256 @@
+# Kubernetes Manifests for Churn Prediction Service
+# =================================================
+# 
+# This document explains the Kubernetes resources needed to deploy
+# the Customer Churn Prediction API.
+# 
+# Files to create:
+# ----------------
+# 1. deployment.yaml - Main application deployment
+# 2. service.yaml - Service to expose the application
+# 3. configmap.yaml - Configuration
+# 4. secrets.yaml - Sensitive configuration (template)
+# 5. hpa.yaml - Horizontal Pod Autoscaler
+# 6. ingress.yaml - Ingress for external access
+# 
+# Below are example manifests that can be customized for your environment.
+
+---
+# ============================================
+# 1. Namespace
+# ============================================
+# Create a dedicated namespace for the MLOps workloads
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mlops
+  labels:
+    app: churn-prediction
+    environment: production
+
+---
+# ============================================
+# 2. ConfigMap
+# ============================================
+# Non-sensitive configuration
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: churn-api-config
+  namespace: mlops
+data:
+  MODEL_PATH: "/app/models/churn_model.pkl"
+  LOG_LEVEL: "INFO"
+  API_WORKERS: "4"
+
+---
+# ============================================
+# 3. Secret (Template)
+# ============================================
+# NOTE: In production, use Kubernetes secrets management
+# or external secret managers (Vault, AWS Secrets Manager, etc.)
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: churn-api-secrets
+  namespace: mlops
+type: Opaque
+stringData:
+  # Placeholder - replace with actual secrets
+  MLFLOW_TRACKING_URI: "http://mlflow-server:5000"
+  DB_PASSWORD: "placeholder-change-me"
+
+---
+# ============================================
+# 4. Deployment
+# ============================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: churn-prediction-api
+  namespace: mlops
+  labels:
+    app: churn-prediction
+    component: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: churn-prediction
+      component: api
+  template:
+    metadata:
+      labels:
+        app: churn-prediction
+        component: api
+    spec:
+      containers:
+        - name: churn-api
+          image: churn-prediction-api:latest  # Replace with your registry
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: churn-api-config
+            - secretRef:
+                name: churn-api-secrets
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: model-storage
+              mountPath: /app/models
+              readOnly: true
+      volumes:
+        - name: model-storage
+          # Option 1: Use PersistentVolumeClaim
+          persistentVolumeClaim:
+            claimName: model-pvc
+          # Option 2: Use emptyDir for testing
+          # emptyDir: {}
+      # Security best practices
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+
+---
+# ============================================
+# 5. Service
+# ============================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: churn-prediction-api
+  namespace: mlops
+  labels:
+    app: churn-prediction
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8000
+      protocol: TCP
+      name: http
+  selector:
+    app: churn-prediction
+    component: api
+
+---
+# ============================================
+# 6. Horizontal Pod Autoscaler
+# ============================================
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: churn-prediction-hpa
+  namespace: mlops
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: churn-prediction-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+
+---
+# ============================================
+# 7. Ingress (Example for nginx-ingress)
+# ============================================
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: churn-prediction-ingress
+  namespace: mlops
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+    - host: churn-api.example.com  # Replace with your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: churn-prediction-api
+                port:
+                  number: 80
+
+---
+# ============================================
+# 8. PersistentVolumeClaim for Models
+# ============================================
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-pvc
+  namespace: mlops
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Gi
+  # storageClassName: standard  # Uncomment and set for your cluster
+
+---
+# ============================================
+# Deployment Instructions
+# ============================================
+#
+# 1. Create the namespace:
+#    kubectl apply -f namespace.yaml
+#
+# 2. Deploy the application:
+#    kubectl apply -f .
+#
+# 3. Check status:
+#    kubectl get pods -n mlops
+#    kubectl get svc -n mlops
+#
+# 4. View logs:
+#    kubectl logs -f deployment/churn-prediction-api -n mlops
+#
+# 5. Test the API:
+#    kubectl port-forward svc/churn-prediction-api 8000:80 -n mlops
+#    curl http://localhost:8000/health

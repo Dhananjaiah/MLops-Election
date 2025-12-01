@@ -1,0 +1,89 @@
+# Docker Compose for Customer Churn Prediction
+# =============================================
+
+version: '3.8'
+
+services:
+  # Main API Service
+  churn-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: churn-prediction-api
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/models/churn_model.pkl
+      - LOG_LEVEL=INFO
+    volumes:
+      # Mount models directory for easy model updates
+      - ./models:/app/models:ro
+      # Mount config for runtime configuration
+      - ./config:/app/config:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - mlops-network
+
+  # MLflow Tracking Server (Optional)
+  mlflow:
+    image: python:3.10-slim
+    container_name: mlflow-server
+    ports:
+      - "5000:5000"
+    command: >
+      bash -c "pip install mlflow && 
+               mlflow server --host 0.0.0.0 --port 5000 
+               --backend-store-uri sqlite:///mlflow.db 
+               --default-artifact-root /mlflow/artifacts"
+    volumes:
+      - mlflow-data:/mlflow
+    networks:
+      - mlops-network
+    profiles:
+      - mlflow  # Only start with: docker-compose --profile mlflow up
+
+  # PostgreSQL for MLflow (Optional - Alternative to SQLite)
+  # postgres:
+  #   image: postgres:14
+  #   container_name: mlflow-postgres
+  #   environment:
+  #     POSTGRES_USER: mlflow
+  #     POSTGRES_PASSWORD: mlflow
+  #     POSTGRES_DB: mlflow
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - mlops-network
+  #   profiles:
+  #     - mlflow
+
+networks:
+  mlops-network:
+    driver: bridge
+
+volumes:
+  mlflow-data:
+  # postgres-data:
+
+# Usage:
+# ------
+# Start API only:
+#   docker-compose up -d churn-api
+#
+# Start with MLflow:
+#   docker-compose --profile mlflow up -d
+#
+# Build and start:
+#   docker-compose up --build
+#
+# View logs:
+#   docker-compose logs -f churn-api
+#
+# Stop all:
+#   docker-compose down
