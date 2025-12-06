@@ -180,7 +180,7 @@ cd ~/mlops-course/project
 
 ## Next Steps
 
-→ Continue to **Lecture 3.7**: Next topic
+→ Continue to **Section 4**: Course Project Overview: Real-World Use Case
 
 ---
 

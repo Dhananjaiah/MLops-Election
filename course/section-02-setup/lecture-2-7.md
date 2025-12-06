@@ -82,7 +82,7 @@ FROM python:3.10-slim  # Not python:3.10 (half the size)
 # Don't run everything at once
 # Close IDE when running Docker, or vice versa
 
-# Use pyth on in resource-efficient mode
+# Use python in resource-efficient mode
 export PYTHONOPTIMIZE=1
 ```
 
