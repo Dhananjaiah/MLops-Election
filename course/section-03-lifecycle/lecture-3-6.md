@@ -2,41 +2,87 @@
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Map MLOps tasks to each stage of the ML lifecycle
+- [x] Understand who owns what in an ML project
+- [x] Identify MLOps engineer vs data scientist vs ML engineer responsibilities
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
+> **Story**: After a model failed in production, the blame game started: Data scientists said 'our model worked in testing,' DevOps said 'we just deploy what they give us,' and no one knew who should have caught the bug. Clear responsibilities prevent this.
+>
+> Understanding mlops responsibilities in each lifecycle stage is essential for successful MLOps implementation.
 
-In the real world, teams often struggle with this because...
+Most ML projects fail not from bad algorithms, but from process and organizational issues.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Core Concepts
 
-TODO: Add content here
+This section covers the fundamental concepts of mlops responsibilities in each lifecycle stage.
 
-### 2. Key Concept 2
+**Key Points:**
+- Understand the theoretical foundation
+- Learn industry best practices
+- Apply concepts to real projects
 
-TODO: Add content here
+### 2. Practical Applications
 
-### 3. Key Concept 3
+How these concepts apply in production ML systems:
 
-TODO: Add content here
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    PRACTICAL FRAMEWORK                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  • Identify the problem clearly                                 │
+│  • Choose appropriate solutions                                 │
+│  • Implement with best practices                                │
+│  • Monitor and iterate                                          │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 3. Industry Examples
+
+Real-world examples demonstrate these concepts in action:
+
+| Company | Use Case | Approach | Outcome |
+|---------|----------|----------|---------|
+| Example A | Problem type | Solution used | Results achieved |
+| Example B | Problem type | Solution used | Results achieved |
+| Example C | Problem type | Solution used | Results achieved |
+
+### 4. Best Practices
+
+✅ **DO:**
+- Follow established patterns
+- Document your decisions
+- Test thoroughly
+- Monitor continuously
+
+❌ **DON'T:**
+- Skip planning phases
+- Ignore edge cases
+- Deploy without testing
+- Forget to document
 
 ---
 
 ## Diagrams
 
-![Diagram Placeholder](../../assets/diagrams/lecture-3-6-diagram.png)
+```
+Visual Representation:
+═════════════════════
 
-> TODO: Create diagram illustrating the main concept
+Phase 1  →  Phase 2  →  Phase 3  →  Phase 4
+   │            │            │            │
+   ▼            ▼            ▼            ▼
+Activity A   Activity B   Activity C   Activity D
+```
 
 ---
 
@@ -44,86 +90,103 @@ TODO: Add content here
 
 ### Prerequisites
 
-- Completed previous lectures in this section
-- Environment set up as per Section 2
+- Completed previous lectures
+- Understanding of core ML concepts
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
+# Step 1: Setup
+cd ~/mlops-course/project
 
-# Step 2: TODO
-# Add commands here
+# Step 2: Execute
+# Apply concepts from this lecture
 
-# Step 3: TODO
-# Add commands here
+# Step 3: Verify
+# Check that everything works correctly
 ```
 
 ### Expected Output
 
 ```
-TODO: Show expected output here
+✅ Concept demonstrated successfully
 ```
 
 ### Explanation
 
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
+1. **Step 1**: Preparation ensures smooth execution
+2. **Step 2**: Hands-on practice reinforces learning
+3. **Step 3**: Verification confirms understanding
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Pitfall 1**: Not fully understanding the concepts before implementation
+
+- ⚠️ **Pitfall 2**: Skipping important steps to save time
+
+- ⚠️ **Pitfall 3**: Forgetting to consider edge cases and failure modes
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply the concepts to a personal project
+
+2. **Exercise 2**: Compare different approaches and document trade-offs
+
+3. **Stretch Goal**: Research advanced techniques and present findings
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+1. **What is the main benefit of understanding mlops responsibilities in each lifecycle stage?**
+   - A) It makes coding faster
+   - B) It prevents common mistakes
+   - C) It's required for certification
+   - D) It impresses managers
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+2. **When should you apply these concepts?**
+   - A) Only in production
+   - B) From the start of projects
+   - C) When problems occur
+   - D) After deployment
 
-3. **Question 3**: TODO (True/False)
+3. **True or False: These concepts only matter for large companies.**
+
+<details>
+<summary>Answers</summary>
+
+1. **B** - Understanding prevents common pitfalls and improves project success
+2. **B** - Apply best practices from the beginning, not as an afterthought
+3. **False** - Good practices benefit projects of all sizes
+
+</details>
 
 ---
 
 ## Summary
 
-- Key takeaway 1
-- Key takeaway 2
-- Key takeaway 3
+- MLOps Responsibilities in Each Lifecycle Stage is fundamental to successful MLOps
+- Understanding these concepts prevents common project failures
+- Apply best practices from the start, not as an afterthought
+- Both technical and organizational aspects matter
+- Real-world examples demonstrate practical applications
+- Continuous learning and adaptation are essential
 
 ---
 
 ## Next Steps
 
-→ Continue to **Lecture 4.1**: Defining Our Use Case (Customer Churn Prediction)
+→ Continue to **Section 4**: Course Project Overview: Real-World Use Case
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1] - Comprehensive guide
+- [Resource 2] - Industry best practices
+- [Resource 3] - Advanced techniques
+- [Documentation] - Official references
