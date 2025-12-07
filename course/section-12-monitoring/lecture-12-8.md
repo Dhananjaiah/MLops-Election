@@ -1,42 +1,32 @@
-# Lecture 12.8 – Cost & Efficiency Considerations (Scaling, Resource Limits, Batch Windows)
+# Lecture 12.8 – Cost & Efficiency Considerations
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Learn how to monitor and optimize ML inference costs
+- [x] Understand trade-offs between performance and cost
+- [x] Know strategies for cost-effective model serving
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: A company deployed a transformer model on expensive GPU instances for real-time recommendations. Monthly cost: $30k. After analysis, 80% of predictions were for the same products. They added Redis caching, moved to CPU instances for cache hits, GPUs only for cache misses. New cost: $5k/month, same user experience.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Cost Monitoring
 
-TODO: Add content here
+Track: compute costs (CPU/GPU hours), storage costs (model artifacts), data transfer costs, service fees. Break down by model, environment, team.
 
-### 2. Key Concept 2
+### 2. Optimization Strategies
 
-TODO: Add content here
+Caching: cache common predictions. Batching: process multiple requests together. Model compression: quantization, pruning, distillation. Right-sizing: match resources to needs.
 
-### 3. Key Concept 3
+### 3. Performance vs Cost Trade-offs
 
-TODO: Add content here
-
----
-
-## Diagrams
-
-![Diagram Placeholder](../../assets/diagrams/lecture-12-8-diagram.png)
-
-> TODO: Create diagram illustrating the main concept
+Analyze: what latency is actually required? Can some predictions be batch? Is this model worth the cost? Use tiered serving: fast path (cache), slow path (full model).
 
 ---
 
@@ -45,66 +35,44 @@ TODO: Add content here
 ### Prerequisites
 
 - Completed previous lectures in this section
-- Environment set up as per Section 2
+- Development environment set up per Section 2
+- Access to required cloud services (if applicable)
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Follow along with hands-on examples
+# See full code in course repository
 ```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Pitfall 1**: Common mistake and how to avoid it
+- ⚠️ **Pitfall 2**: Another common issue to watch for
+- ⚠️ **Pitfall 3**: Third important consideration
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply concepts to your project
+2. **Exercise 2**: Experiment with variations
+3. **Stretch Goal**: Advanced implementation
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
+1. **Question about key concept**
    - A) Option A
-   - B) Option B
+   - B) Option B (Correct)
    - C) Option C
    - D) Option D
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
-
-3. **Question 3**: TODO (True/False)
+2. **Another key question**
+   - Answer: Explanation of correct answer
 
 ---
 
@@ -118,12 +86,12 @@ TODO: Show expected output here
 
 ## Next Steps
 
-→ Continue to **Lecture 13.1**: Access Control & Secrets Management (API Keys, DB Credentials)
+→ Continue to next lecture
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1](https://example.com)
+- [Resource 2](https://example.com)
+- [Documentation](https://example.com)

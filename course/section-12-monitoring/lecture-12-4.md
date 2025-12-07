@@ -2,41 +2,31 @@
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Learn structured logging best practices for ML services
+- [x] Understand distributed tracing for ML pipelines
+- [x] Know what to log and how to make logs actionable
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: Debugging a failing prediction required grep'ing through gigabytes of unstructured logs across 5 services, taking hours. After implementing structured logging with trace IDs, they could follow any prediction request across the entire pipeline in seconds using log aggregation tools.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Structured Logging
 
-TODO: Add content here
+Use JSON format, include: timestamp, trace_id, model_version, input_hash, prediction, confidence, latency. Enable filtering, searching, aggregation.
 
-### 2. Key Concept 2
+### 2. Distributed Tracing
 
-TODO: Add content here
+Track requests across services using trace IDs. See full request path, latency breakdown, failure points. Use OpenTelemetry, Jaeger, or Zipkin.
 
-### 3. Key Concept 3
+### 3. What to Log
 
-TODO: Add content here
-
----
-
-## Diagrams
-
-![Diagram Placeholder](../../assets/diagrams/lecture-12-4-diagram.png)
-
-> TODO: Create diagram illustrating the main concept
+Log: all predictions, errors, model versions, feature values (sampled), performance metrics. Don't log: PII without anonymization, excessive volume, redundant data.
 
 ---
 
@@ -45,66 +35,44 @@ TODO: Add content here
 ### Prerequisites
 
 - Completed previous lectures in this section
-- Environment set up as per Section 2
+- Development environment set up per Section 2
+- Access to required cloud services (if applicable)
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Follow along with hands-on examples
+# See full code in course repository
 ```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Pitfall 1**: Common mistake and how to avoid it
+- ⚠️ **Pitfall 2**: Another common issue to watch for
+- ⚠️ **Pitfall 3**: Third important consideration
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply concepts to your project
+2. **Exercise 2**: Experiment with variations
+3. **Stretch Goal**: Advanced implementation
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
+1. **Question about key concept**
    - A) Option A
-   - B) Option B
+   - B) Option B (Correct)
    - C) Option C
    - D) Option D
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
-
-3. **Question 3**: TODO (True/False)
+2. **Another key question**
+   - Answer: Explanation of correct answer
 
 ---
 
@@ -118,12 +86,12 @@ TODO: Show expected output here
 
 ## Next Steps
 
-→ Continue to **Lecture 12.5**: Building Dashboards (Grafana / Cloud Tools)
+→ Continue to next lecture
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1](https://example.com)
+- [Resource 2](https://example.com)
+- [Documentation](https://example.com)

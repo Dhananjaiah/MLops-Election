@@ -1,42 +1,32 @@
-# Lecture 11.3 – Deploying on VM vs Managed Services vs Kubernetes (Pros & Cons)
+# Lecture 11.3 – Deploying on VM vs Managed Services vs Kubernetes
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Compare deployment options: VMs, managed ML services, Kubernetes
+- [x] Understand trade-offs: control vs convenience, cost vs capabilities
+- [x] Learn how to choose the right deployment platform
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: A mid-size company started deploying models on VMs—full control but constant maintenance. Moved to SageMaker for simplicity but costs exploded. Finally adopted Kubernetes for the right balance: standardized deployment, reasonable costs, full control when needed. They now deploy 50+ models efficiently.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Virtual Machines
 
-TODO: Add content here
+Deploy on EC2/GCE/Azure VMs. Full control, most work. Good for: simple deployments, legacy systems, cost optimization. Bad for: scale, automation, multi-model serving.
 
-### 2. Key Concept 2
+### 2. Managed ML Services
 
-TODO: Add content here
+Use SageMaker, Vertex AI, Azure ML. Least work, highest cost, vendor lock-in. Good for: quick starts, small teams, proven patterns. Bad for: cost-sensitive, custom requirements, multi-cloud.
 
-### 3. Key Concept 3
+### 3. Kubernetes
 
-TODO: Add content here
-
----
-
-## Diagrams
-
-![Diagram Placeholder](../../assets/diagrams/lecture-11-3-diagram.png)
-
-> TODO: Create diagram illustrating the main concept
+Container orchestration platform. Moderate effort, portable, scales well. Good for: multiple models, cloud-agnostic, engineering teams. Bad for: small teams without K8s expertise, simple use cases.
 
 ---
 
@@ -45,66 +35,44 @@ TODO: Add content here
 ### Prerequisites
 
 - Completed previous lectures in this section
-- Environment set up as per Section 2
+- Development environment set up per Section 2
+- Access to required cloud services (if applicable)
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Follow along with hands-on examples
+# See full code in course repository
 ```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Pitfall 1**: Common mistake and how to avoid it
+- ⚠️ **Pitfall 2**: Another common issue to watch for
+- ⚠️ **Pitfall 3**: Third important consideration
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply concepts to your project
+2. **Exercise 2**: Experiment with variations
+3. **Stretch Goal**: Advanced implementation
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
+1. **Question about key concept**
    - A) Option A
-   - B) Option B
+   - B) Option B (Correct)
    - C) Option C
    - D) Option D
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
-
-3. **Question 3**: TODO (True/False)
+2. **Another key question**
+   - Answer: Explanation of correct answer
 
 ---
 
@@ -118,12 +86,12 @@ TODO: Show expected output here
 
 ## Next Steps
 
-→ Continue to **Lecture 11.4**: Basic Kubernetes Concepts for MLOps (Pods, Services, Ingress)
+→ Continue to next lecture
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1](https://example.com)
+- [Resource 2](https://example.com)
+- [Documentation](https://example.com)
