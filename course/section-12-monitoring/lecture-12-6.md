@@ -49,9 +49,15 @@ Runbook for each alert: diagnostic steps, mitigation actions, rollback procedure
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: Another common issue to watch for
-- ⚠️ **Pitfall 3**: Third important consideration
+- ⚠️ **Alert Fatigue from Low Thresholds**: Setting thresholds too sensitive (e.g., CPU >50%) generates hundreds of false positives. Engineers ignore all alerts. Solution: Use multi-window alerts (sustained over 5+ minutes) and higher thresholds based on actual impact.
+
+- ⚠️ **Missing Drift Detection Alerts**: Monitoring infrastructure and API metrics but not model-specific metrics like prediction distribution drift. Model degrades silently for weeks. Solution: Always include drift detection, accuracy monitoring on recent data, and prediction distribution checks.
+
+- ⚠️ **Alerts Without Runbooks**: Alert fires, oncall engineer doesn't know what to do, wastes time investigating. Solution: Every alert must have a runbook with diagnostic steps, mitigation actions, and rollback procedures. No runbook = no alert.
+
+- ⚠️ **Over-Alerting on Non-Actionable Issues**: Alerting on things that don't require immediate action (e.g., slight cost increases, minor latency bumps). Solution: Only alert on issues that require human intervention within SLA timeframes. Everything else goes to dashboards.
+
+- ⚠️ **No Alert Testing**: Alerts are configured but never tested. When real incident occurs, alerts don't fire. Solution: Regular alert testing, chaos engineering, simulated failures to validate monitoring.
 
 ---
 
