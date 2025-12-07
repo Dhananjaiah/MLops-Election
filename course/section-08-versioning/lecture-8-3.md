@@ -1,42 +1,45 @@
-# Lecture 8.3 – Model Registries (MLflow Model Registry / SageMaker / Custom)
+# Lecture - Model Registries (MLflow Model Registry / SageMaker / Custom)
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] What model registries are and why they exist
+- [x] MLflow Model Registry deep dive
+- [x] Cloud-native registries (AWS, GCP, Azure)
+- [x] Model metadata and lineage
+- [x] Choosing the right registry for your stack
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: Which model.pkl Is In Production?
+>
+> A ride-sharing company had 15 data scientists all saving models as 'model.pkl' in different S3 folders. When a model started making bad predictions, they spent 3 days figuring out which file was in production. A model registry would have answered this in 30 seconds.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Model registry architecture
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-### 2. Key Concept 2
+### 2. Registering models with MLflow
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-### 3. Key Concept 3
+### 3. Model metadata (metrics, params, lineage)
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
----
+### 4. Model discovery and search
 
-## Diagrams
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-![Diagram Placeholder](../../assets/diagrams/lecture-8-3-diagram.png)
+### 5. Comparison of registry solutions
 
-> TODO: Create diagram illustrating the main concept
+TODO: Detailed explanation with code examples, diagrams, and best practices.
+
 
 ---
 
@@ -49,81 +52,49 @@ TODO: Add content here
 
 ### Step-by-Step Instructions
 
-```bash
-# Step 1: TODO
-cd project
+TODO: Add detailed lab instructions.
 
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
-```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
-## Common Pitfalls / Gotchas
+## Common Pitfalls
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+### ❌ Pitfall 1: TODO
 
----
+Describe common mistake and how to avoid it.
 
-## Homework / Practice
+### ❌ Pitfall 2: TODO
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+Describe common mistake and how to avoid it.
 
 ---
 
-## Quick Quiz
+## Quiz
 
-1. **Question 1**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+**Question 1**: TODO
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+a) Option A  
+b) Option B  
+c) Option C  
+d) Option D  
 
-3. **Question 3**: TODO (True/False)
+<details>
+<summary>Answer</summary>
 
----
+**Answer**: Explanation
 
-## Summary
-
-- Key takeaway 1
-- Key takeaway 2
-- Key takeaway 3
+</details>
 
 ---
 
-## Next Steps
+## Key Takeaways
 
-→ Continue to **Lecture 8.4**: Model States: Staging, Production, Archived
+✅ Key takeaway 1  
+✅ Key takeaway 2  
+✅ Key takeaway 3  
 
 ---
 
-## Additional Resources
+## Next Lecture
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+→ Continue to the next lecture in this section.

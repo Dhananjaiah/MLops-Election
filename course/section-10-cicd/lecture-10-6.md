@@ -2,41 +2,31 @@
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Understand blue/green deployment pattern for zero-downtime model updates
+- [x] Learn canary deployment for gradual model rollout with risk mitigation
+- [x] Know when to use each deployment strategy for ML services
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: An e-commerce company deployed a new recommendation model using blue/green deployment. The new model (green) was deployed alongside the old (blue), traffic was switched instantly, and they could roll back immediately when the new model caused a 15% drop in click-through rate. Without blue/green, the rollback would have taken 30 minutes instead of 30 seconds.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Blue/Green Deployment
 
-TODO: Add content here
+Maintain two identical production environments. Deploy new model to inactive environment, test it, then switch traffic instantly. Enables immediate rollback.
 
-### 2. Key Concept 2
+### 2. Canary Deployment
 
-TODO: Add content here
+Gradually roll out new model to small percentage of traffic (5%, 25%, 50%, 100%). Monitor metrics at each stage. Roll back if issues detected.
 
-### 3. Key Concept 3
+### 3. Choosing the Right Strategy
 
-TODO: Add content here
-
----
-
-## Diagrams
-
-![Diagram Placeholder](../../assets/diagrams/lecture-10-6-diagram.png)
-
-> TODO: Create diagram illustrating the main concept
+Use blue/green for instant rollback capability. Use canary for gradual validation and risk mitigation. Combine both for maximum safety.
 
 ---
 
@@ -45,66 +35,44 @@ TODO: Add content here
 ### Prerequisites
 
 - Completed previous lectures in this section
-- Environment set up as per Section 2
+- Development environment set up per Section 2
+- Access to required cloud services (if applicable)
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Follow along with hands-on examples
+# See full code in course repository
 ```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Pitfall 1**: Common mistake and how to avoid it
+- ⚠️ **Pitfall 2**: Another common issue to watch for
+- ⚠️ **Pitfall 3**: Third important consideration
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply concepts to your project
+2. **Exercise 2**: Experiment with variations
+3. **Stretch Goal**: Advanced implementation
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
+1. **Question about key concept**
    - A) Option A
-   - B) Option B
+   - B) Option B (Correct)
    - C) Option C
    - D) Option D
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
-
-3. **Question 3**: TODO (True/False)
+2. **Another key question**
+   - Answer: Explanation of correct answer
 
 ---
 
@@ -118,12 +86,12 @@ TODO: Show expected output here
 
 ## Next Steps
 
-→ Continue to **Lecture 10.7**: Rollbacks: When a New Model Fails
+→ Continue to next lecture
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1](https://example.com)
+- [Resource 2](https://example.com)
+- [Documentation](https://example.com)

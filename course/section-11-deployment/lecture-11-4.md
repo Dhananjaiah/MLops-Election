@@ -1,42 +1,32 @@
-# Lecture 11.4 – Basic Kubernetes Concepts for MLOps (Pods, Services, Ingress)
+# Lecture 11.4 – Basic Kubernetes Concepts for MLOps
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Understand core Kubernetes concepts: Pods, Services, Deployments
+- [x] Learn how K8s applies to ML model serving
+- [x] Know basic kubectl commands for ML operations
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: An ML team struggled with manual deployment: SSH into servers, copy model files, restart processes. After adopting Kubernetes, deployments became declarative—describe desired state, K8s handles the rest. Scaling from 2 to 20 replicas: one command. Rolling updates: automatic. Rollbacks: instant.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Core K8s Concepts
 
-TODO: Add content here
+Pod: smallest deployable unit (container). Deployment: manages Pod replicas. Service: stable network endpoint. Ingress: external access routing.
 
-### 2. Key Concept 2
+### 2. K8s for ML Serving
 
-TODO: Add content here
+Package model in Docker, create Deployment for replicas, expose via Service, configure Ingress for external access. K8s handles scaling, health checks, rolling updates.
 
-### 3. Key Concept 3
+### 3. Essential kubectl Commands
 
-TODO: Add content here
-
----
-
-## Diagrams
-
-![Diagram Placeholder](../../assets/diagrams/lecture-11-4-diagram.png)
-
-> TODO: Create diagram illustrating the main concept
+kubectl apply, kubectl get pods, kubectl logs, kubectl scale, kubectl rollout. Monitor and manage ML deployments.
 
 ---
 
@@ -45,66 +35,44 @@ TODO: Add content here
 ### Prerequisites
 
 - Completed previous lectures in this section
-- Environment set up as per Section 2
+- Development environment set up per Section 2
+- Access to required cloud services (if applicable)
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Follow along with hands-on examples
+# See full code in course repository
 ```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Pitfall 1**: Common mistake and how to avoid it
+- ⚠️ **Pitfall 2**: Another common issue to watch for
+- ⚠️ **Pitfall 3**: Third important consideration
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply concepts to your project
+2. **Exercise 2**: Experiment with variations
+3. **Stretch Goal**: Advanced implementation
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
+1. **Question about key concept**
    - A) Option A
-   - B) Option B
+   - B) Option B (Correct)
    - C) Option C
    - D) Option D
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
-
-3. **Question 3**: TODO (True/False)
+2. **Another key question**
+   - Answer: Explanation of correct answer
 
 ---
 
@@ -118,12 +86,12 @@ TODO: Show expected output here
 
 ## Next Steps
 
-→ Continue to **Lecture 11.5**: Model Serving Frameworks (KFServing, Seldon, Bento – High Level)
+→ Continue to next lecture
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1](https://example.com)
+- [Resource 2](https://example.com)
+- [Documentation](https://example.com)

@@ -2,41 +2,31 @@
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Learn how to design effective alerts without alert fatigue
+- [x] Understand incident response procedures for ML failures
+- [x] Know how to create and maintain runbooks for common issues
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: A team had 200 alerts per day—most false positives. Oncall engineers ignored them (alert fatigue). When a real outage occurred (model serving random predictions), it took 4 hours to notice. They reduced to 5 high-quality alerts: error rate spike, latency spike, drift detected, model accuracy drop, deployment failure. Each alert has a runbook. MTTR improved from 4 hours to 15 minutes.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Effective Alerting
 
-TODO: Add content here
+Alert only on actionable issues. Use multi-window monitoring (5min, 15min, 1hr). Avoid alert fatigue. Good: error rate >5% for 5min. Bad: CPU >50% momentarily.
 
-### 2. Key Concept 2
+### 2. ML-Specific Alerts
 
-TODO: Add content here
+Model performance degradation, drift detected, prediction distribution shift, inference latency spike, model loading failure, data pipeline delay.
 
-### 3. Key Concept 3
+### 3. Incident Response
 
-TODO: Add content here
-
----
-
-## Diagrams
-
-![Diagram Placeholder](../../assets/diagrams/lecture-12-6-diagram.png)
-
-> TODO: Create diagram illustrating the main concept
+Runbook for each alert: diagnostic steps, mitigation actions, rollback procedures. Example: Model Accuracy Drop → Check recent deployment → Review data quality → Rollback if needed → Investigate root cause.
 
 ---
 
@@ -45,66 +35,50 @@ TODO: Add content here
 ### Prerequisites
 
 - Completed previous lectures in this section
-- Environment set up as per Section 2
+- Development environment set up per Section 2
+- Access to required cloud services (if applicable)
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Follow along with hands-on examples
+# See full code in course repository
 ```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Alert Fatigue from Low Thresholds**: Setting thresholds too sensitive (e.g., CPU >50%) generates hundreds of false positives. Engineers ignore all alerts. Solution: Use multi-window alerts (sustained over 5+ minutes) and higher thresholds based on actual impact.
+
+- ⚠️ **Missing Drift Detection Alerts**: Monitoring infrastructure and API metrics but not model-specific metrics like prediction distribution drift. Model degrades silently for weeks. Solution: Always include drift detection, accuracy monitoring on recent data, and prediction distribution checks.
+
+- ⚠️ **Alerts Without Runbooks**: Alert fires, oncall engineer doesn't know what to do, wastes time investigating. Solution: Every alert must have a runbook with diagnostic steps, mitigation actions, and rollback procedures. No runbook = no alert.
+
+- ⚠️ **Over-Alerting on Non-Actionable Issues**: Alerting on things that don't require immediate action (e.g., slight cost increases, minor latency bumps). Solution: Only alert on issues that require human intervention within SLA timeframes. Everything else goes to dashboards.
+
+- ⚠️ **No Alert Testing**: Alerts are configured but never tested. When real incident occurs, alerts don't fire. Solution: Regular alert testing, chaos engineering, simulated failures to validate monitoring.
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply concepts to your project
+2. **Exercise 2**: Experiment with variations
+3. **Stretch Goal**: Advanced implementation
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
+1. **Question about key concept**
    - A) Option A
-   - B) Option B
+   - B) Option B (Correct)
    - C) Option C
    - D) Option D
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
-
-3. **Question 3**: TODO (True/False)
+2. **Another key question**
+   - Answer: Explanation of correct answer
 
 ---
 
@@ -118,12 +92,12 @@ TODO: Show expected output here
 
 ## Next Steps
 
-→ Continue to **Lecture 12.7**: Closing the Loop: Feedback Data, New Labels & Retraining Triggers
+→ Continue to next lecture
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1](https://example.com)
+- [Resource 2](https://example.com)
+- [Documentation](https://example.com)

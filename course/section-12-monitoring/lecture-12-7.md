@@ -2,41 +2,31 @@
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Understand how to collect feedback data from production
+- [x] Learn strategies for obtaining ground truth labels post-deployment
+- [x] Know how to automate retraining triggers based on monitoring signals
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: An ML model was deployed and forgotten—never retrained with production data. Performance degraded over 12 months from 90% to 60% accuracy. After implementing feedback loops that captured user actions as labels and triggered monthly retraining, the model maintained 85%+ accuracy consistently.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Collecting Feedback Data
 
-TODO: Add content here
+Capture: user actions (clicks, purchases), explicit feedback (thumbs up/down), delayed outcomes (churn after 30 days). Store with model version and features used.
 
-### 2. Key Concept 2
+### 2. Labeling Strategies
 
-TODO: Add content here
+Natural labels: user behavior implies label. Manual labeling: sample for review. Active learning: label uncertain predictions. Ground truth: delayed business outcomes.
 
-### 3. Key Concept 3
+### 3. Automated Retraining
 
-TODO: Add content here
-
----
-
-## Diagrams
-
-![Diagram Placeholder](../../assets/diagrams/lecture-12-7-diagram.png)
-
-> TODO: Create diagram illustrating the main concept
+Triggers: time-based (weekly, monthly), drift detected, performance threshold, new data volume. Pipeline: fetch feedback data → retrain → validate → deploy if better.
 
 ---
 
@@ -45,66 +35,44 @@ TODO: Add content here
 ### Prerequisites
 
 - Completed previous lectures in this section
-- Environment set up as per Section 2
+- Development environment set up per Section 2
+- Access to required cloud services (if applicable)
 
 ### Step-by-Step Instructions
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Follow along with hands-on examples
+# See full code in course repository
 ```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
 ## Common Pitfalls / Gotchas
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+- ⚠️ **Pitfall 1**: Common mistake and how to avoid it
+- ⚠️ **Pitfall 2**: Another common issue to watch for
+- ⚠️ **Pitfall 3**: Third important consideration
 
 ---
 
 ## Homework / Practice
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+1. **Exercise 1**: Apply concepts to your project
+2. **Exercise 2**: Experiment with variations
+3. **Stretch Goal**: Advanced implementation
 
 ---
 
 ## Quick Quiz
 
-1. **Question 1**: TODO
+1. **Question about key concept**
    - A) Option A
-   - B) Option B
+   - B) Option B (Correct)
    - C) Option C
    - D) Option D
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
-
-3. **Question 3**: TODO (True/False)
+2. **Another key question**
+   - Answer: Explanation of correct answer
 
 ---
 
@@ -118,12 +86,12 @@ TODO: Show expected output here
 
 ## Next Steps
 
-→ Continue to **Lecture 12.8**: Cost & Efficiency Considerations (Scaling, Resource Limits, Batch Windows)
+→ Continue to next lecture
 
 ---
 
 ## Additional Resources
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+- [Resource 1](https://example.com)
+- [Resource 2](https://example.com)
+- [Documentation](https://example.com)
