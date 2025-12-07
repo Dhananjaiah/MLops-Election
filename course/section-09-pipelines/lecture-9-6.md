@@ -1,42 +1,45 @@
-# Lecture 9.6 – Scheduling, Retries & Failure Handling
+# Lecture - Scheduling, Retries & Failure Handling
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] Cron-based scheduling
+- [x] Event-driven pipeline triggers
+- [x] Retry strategies and backoff
+- [x] Failure notifications and alerting
+- [x] Circuit breakers and failsafes
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: The 3 AM Alert Nobody Wanted
+>
+> A pipeline was scheduled to run at 3 AM. When it failed, it paged the on-call engineer. The fix? Add 3 retries with exponential backoff—95% of failures were transient network issues that resolved in 30 seconds. Alerts dropped by 90%.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Scheduling strategies
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-### 2. Key Concept 2
+### 2. Retry policies
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-### 3. Key Concept 3
+### 3. Failure handling patterns
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
----
+### 4. Alerting best practices
 
-## Diagrams
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-![Diagram Placeholder](../../assets/diagrams/lecture-9-6-diagram.png)
+### 5. Graceful degradation
 
-> TODO: Create diagram illustrating the main concept
+TODO: Detailed explanation with code examples, diagrams, and best practices.
+
 
 ---
 
@@ -49,81 +52,49 @@ TODO: Add content here
 
 ### Step-by-Step Instructions
 
-```bash
-# Step 1: TODO
-cd project
+TODO: Add detailed lab instructions.
 
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
-```
-
-### Expected Output
-
-```
-TODO: Show expected output here
-```
-
-### Explanation
-
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
 
 ---
 
-## Common Pitfalls / Gotchas
+## Common Pitfalls
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
+### ❌ Pitfall 1: TODO
 
----
+Describe common mistake and how to avoid it.
 
-## Homework / Practice
+### ❌ Pitfall 2: TODO
 
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
+Describe common mistake and how to avoid it.
 
 ---
 
-## Quick Quiz
+## Quiz
 
-1. **Question 1**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+**Question 1**: TODO
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+a) Option A  
+b) Option B  
+c) Option C  
+d) Option D  
 
-3. **Question 3**: TODO (True/False)
+<details>
+<summary>Answer</summary>
 
----
+**Answer**: Explanation
 
-## Summary
-
-- Key takeaway 1
-- Key takeaway 2
-- Key takeaway 3
+</details>
 
 ---
 
-## Next Steps
+## Key Takeaways
 
-→ Continue to **Lecture 9.7**: Where MLOps Sits vs Data Engineers in Orchestration
+✅ Key takeaway 1  
+✅ Key takeaway 2  
+✅ Key takeaway 3  
 
 ---
 
-## Additional Resources
+## Next Lecture
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+→ Continue to the next lecture in this section.

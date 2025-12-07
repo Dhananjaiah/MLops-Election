@@ -1,42 +1,45 @@
-# Lecture 7.5 – Dockerizing the Model Service (Best Practices for Images)
+# Lecture - Dockerizing the Model Service (Best Practices for Images)
 
 ## In This Lecture You Will Learn
 
-- [ ] Learning outcome 1 - TODO
-- [ ] Learning outcome 2 - TODO
-- [ ] Learning outcome 3 - TODO
+- [x] How to write production-ready Dockerfiles for ML services
+- [x] Multi-stage builds to reduce image size
+- [x] Best practices: non-root users, .dockerignore, layer caching
+- [x] Security considerations for ML containers
+- [x] Optimizing build time and image size
 
 ---
 
 ## Real-World Context
 
-> **Story**: TODO - Add a relatable, real-world story that illustrates why this topic matters.
-
-In the real world, teams often struggle with this because...
+> **Story**: The 12GB Docker Image That Broke CI/CD
+>
+> A fintech company's ML team built a Docker image that was 12GB. Their CI/CD pipeline timed out after 45 minutes trying to push it. The culprit? They copied their entire 8GB dataset and all development dependencies into the image. After optimization (multi-stage build, .dockerignore), they got it down to 450MB and deploys went from 45min to 3min.
 
 ---
 
 ## Main Content
 
-### 1. Key Concept 1
+### 1. Dockerfile anatomy and best practices
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-### 2. Key Concept 2
+### 2. Multi-stage builds for smaller images
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-### 3. Key Concept 3
+### 3. .dockerignore to exclude unnecessary files
 
-TODO: Add content here
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
----
+### 4. Layer caching strategies
 
-## Diagrams
+TODO: Detailed explanation with code examples, diagrams, and best practices.
 
-![Diagram Placeholder](../../assets/diagrams/lecture-7-5-diagram.png)
+### 5. Security: non-root users, no secrets in images
 
-> TODO: Create diagram illustrating the main concept
+TODO: Detailed explanation with code examples, diagrams, and best practices.
+
 
 ---
 
@@ -47,83 +50,77 @@ TODO: Add content here
 - Completed previous lectures in this section
 - Environment set up as per Section 2
 
-### Step-by-Step Instructions
+#### Step 1: Write a basic Dockerfile for FastAPI service
 
 ```bash
-# Step 1: TODO
-cd project
-
-# Step 2: TODO
-# Add commands here
-
-# Step 3: TODO
-# Add commands here
+# Commands here
 ```
 
-### Expected Output
+#### Step 2: Add .dockerignore to exclude .git, data, models
 
+```bash
+# Commands here
 ```
-TODO: Show expected output here
+
+#### Step 3: Implement multi-stage build
+
+```bash
+# Commands here
 ```
 
-### Explanation
+#### Step 4: Run security scan with docker scan
 
-1. **Step 1**: What this step does and why
-2. **Step 2**: What this step does and why
-3. **Step 3**: What this step does and why
+```bash
+# Commands here
+```
 
----
+#### Step 5: Measure image size improvements
 
-## Common Pitfalls / Gotchas
+```bash
+# Commands here
+```
 
-- ⚠️ **Pitfall 1**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 2**: TODO - Common mistake and how to avoid it
-- ⚠️ **Pitfall 3**: TODO - Common mistake and how to avoid it
-
----
-
-## Homework / Practice
-
-1. **Exercise 1**: TODO - Hands-on exercise
-2. **Exercise 2**: TODO - Hands-on exercise
-3. **Stretch Goal**: TODO - Advanced exercise for motivated learners
 
 ---
 
-## Quick Quiz
+## Common Pitfalls
 
-1. **Question 1**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+### ❌ Pitfall 1: TODO
 
-2. **Question 2**: TODO
-   - A) Option A
-   - B) Option B
-   - C) Option C
-   - D) Option D
+Describe common mistake and how to avoid it.
 
-3. **Question 3**: TODO (True/False)
+### ❌ Pitfall 2: TODO
+
+Describe common mistake and how to avoid it.
 
 ---
 
-## Summary
+## Quiz
 
-- Key takeaway 1
-- Key takeaway 2
-- Key takeaway 3
+**Question 1**: TODO
+
+a) Option A  
+b) Option B  
+c) Option C  
+d) Option D  
+
+<details>
+<summary>Answer</summary>
+
+**Answer**: Explanation
+
+</details>
 
 ---
 
-## Next Steps
+## Key Takeaways
 
-→ Continue to **Lecture 7.6**: Local Testing of the Model API (curl, Postman, Simple UI)
+✅ Key takeaway 1  
+✅ Key takeaway 2  
+✅ Key takeaway 3  
 
 ---
 
-## Additional Resources
+## Next Lecture
 
-- [Resource 1](TODO)
-- [Resource 2](TODO)
-- [Documentation](TODO)
+→ Continue to the next lecture in this section.
